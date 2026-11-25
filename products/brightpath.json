@@ -1,0 +1,83 @@
+{
+  "company": "BrightPath Academy",
+  "topic": "our data and AI courses",
+  "appointment": "free counselling session",
+  "catalogue": "Data Analyst Track: 4 months, weekends, 45 thousand rupees.\nAI Engineer Track: 6 months, weekday evenings, 85 thousand rupees.",
+  "items": [
+    {
+      "name": "Data Analyst Track",
+      "aliases": [
+        "data analyst",
+        "analyst"
+      ]
+    },
+    {
+      "name": "AI Engineer Track",
+      "aliases": [
+        "ai engineer",
+        "engineer track"
+      ]
+    }
+  ],
+  "rules": [
+    "Never promise a job, salary or placement."
+  ],
+  "facts": [
+    {
+      "key": "goal",
+      "label": "Goal",
+      "type": "text",
+      "ask": "what they want the course to change for them",
+      "hint": "e.g. career switch, promotion",
+      "points": 15
+    },
+    {
+      "key": "background",
+      "label": "Background",
+      "type": "text",
+      "ask": "what they do or study now",
+      "hint": "current job or study",
+      "points": 10
+    },
+    {
+      "key": "weekly_hours",
+      "label": "Hours a week",
+      "type": "number",
+      "ask": "how much time they can give each week",
+      "hint": "hours per week",
+      "points": 15,
+      "full_if": {
+        "min": 6
+      }
+    },
+    {
+      "key": "start_months",
+      "label": "Start (months)",
+      "type": "number",
+      "ask": "when they'd want to start",
+      "hint": "months until they want to start; a session date is NOT a start",
+      "points": 20,
+      "full_if": {
+        "max": 2
+      }
+    },
+    {
+      "key": "budget_thousand",
+      "label": "Budget (₹ thousand)",
+      "type": "number",
+      "ask": "what fee feels comfortable",
+      "hint": "in thousand rupees; 1 lakh = 100",
+      "points": 15,
+      "full_if": {
+        "min": 45
+      }
+    }
+  ],
+  "keyterms": [
+    "BrightPath",
+    "Data Analyst",
+    "AI Engineer",
+    "Python",
+    "SQL"
+  ]
+}

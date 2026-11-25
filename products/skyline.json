@@ -1,0 +1,127 @@
+{
+  "company": "Skyline Realty",
+  "topic": "homes in Bengaluru",
+  "appointment": "site visit",
+  "catalogue": "Skyline Greens, Whitefield, ready: 2 BHK from 85 lakh, 3 BHK from 1.18 crore.\nSkyline Lakeview, Sarjapur Road, possession December 2027: 2 BHK from 72 lakh, 3 BHK from 98 lakh.\nSkyline Heights, Hebbal, ready, premium: 3 BHK from 1.95 crore, 4 BHK from 2.65 crore.",
+  "items": [
+    {
+      "name": "Skyline Greens",
+      "aliases": [
+        "greens",
+        "whitefield"
+      ]
+    },
+    {
+      "name": "Skyline Lakeview",
+      "aliases": [
+        "lakeview",
+        "sarjapur"
+      ]
+    },
+    {
+      "name": "Skyline Heights",
+      "aliases": [
+        "heights",
+        "hebbal"
+      ]
+    }
+  ],
+  "rules": [
+    "Never promise loan approval or returns, and never suggest rent, demand or value will rise.",
+    "No legal or tax advice."
+  ],
+  "facts": [
+    {
+      "key": "purpose",
+      "label": "Purpose",
+      "type": "text",
+      "ask": "whether it's for living in or investment",
+      "hint": "\"self use\" or \"investment\"",
+      "points": 1
+    },
+    {
+      "key": "location",
+      "label": "Area",
+      "type": "text",
+      "ask": "preferred area",
+      "hint": "area in English",
+      "points": 10,
+      "full_if": {
+        "any_of": [
+          "whitefield",
+          "sarjapur",
+          "hebbal",
+          "itpl"
+        ]
+      }
+    },
+    {
+      "key": "bhk",
+      "label": "BHK",
+      "type": "number",
+      "ask": "home size they need",
+      "hint": "number of bedrooms",
+      "points": 9
+    },
+    {
+      "key": "budget_lakh",
+      "label": "Budget (₹ lakh)",
+      "type": "number",
+      "ask": "comfortable budget",
+      "hint": "in lakh; 1 crore = 100; upper end of range",
+      "points": 20,
+      "full_if": {
+        "min": 72
+      }
+    },
+    {
+      "key": "timeline_months",
+      "label": "Timeline (months)",
+      "type": "number",
+      "ask": "when they'd like to move",
+      "hint": "months until they want to buy or move; a visit date or possession date is NOT a timeline",
+      "points": 20,
+      "full_if": {
+        "max": 3
+      }
+    },
+    {
+      "key": "decision_maker",
+      "label": "Deciding",
+      "type": "text",
+      "ask": "who else is deciding",
+      "hint": "only if they say who decides",
+      "points": 10
+    },
+    {
+      "key": "financing",
+      "label": "Financing",
+      "type": "text",
+      "ask": "loan or own funds",
+      "hint": "\"loan\" or \"cash\"; asking whether loans exist = \"exploring loan\"",
+      "points": 5
+    }
+  ],
+  "keyterms": [
+    "Skyline Realty",
+    "Whitefield",
+    "Sarjapur",
+    "Hebbal",
+    "Skyline Greens",
+    "Lakeview",
+    "BHK",
+    "lakh",
+    "crore"
+  ],
+  "glossary": {
+    "possession status ready": "possession kab taiyar पजेशन कब तैयार रेडी",
+    "nearby schools hospital": "school paas aaspaas bachche स्कूल पास बच्चे अस्पताल",
+    "swimming pool gym": "पूल जिम स्विमिंग",
+    "resale rental returns appreciation": "kiraya nivesh rent निवेश किराया इन्वेस्टमेंट",
+    "maintenance": "मेंटेनेंस rakhrakhav",
+    "legal title documents": "kagaz rera papers कागज दस्तावेज रेरा",
+    "Whitefield Greens": "व्हाइटफील्ड ग्रीन्स",
+    "Sarjapur Lakeview": "सरजापुर लेकव्यू",
+    "Hebbal Heights": "हेब्बल हाइट्स"
+  }
+}

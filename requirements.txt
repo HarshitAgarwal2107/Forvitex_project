@@ -1,0 +1,10 @@
+livekit-agents[deepgram,google,groq,sarvam,silero,cartesia]==1.8.13
+livekit-api==1.2.3
+fastapi==0.165.0
+uvicorn[standard]
+python-dotenv
+fastembed==0.9.1
+numpy
+httpx
+pytest
+openpyxl==3.1.5

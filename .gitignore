@@ -1,0 +1,43 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Customer data, transcripts, backups, voice samples, downloaded models
+data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.wav
+*.mp3
+leads*.csv
+*-calls.csv
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs and scratch
+*.log
+*.tmp
+*.bak
+HANDOFF.md
+
+# Editors and operating systems
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sales Desk</title>
+<style>
+:root{--bg:#f3f5f2;--card:#fff;--ink:#17251f;--mute:#5d6b64;--line:#dbe1dc;--brand:#12664f;--soft:#e3f0ea;--hot:#b3401f;--warm:#8a6100;--bad:#a3262b}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;gap:24px;align-items:center;padding:12px 20px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap}
+h1{font-size:18px;margin:0;margin-right:auto}h2{font-size:15px;margin:0 0 10px}h3{font-size:13px;color:var(--mute);margin:16px 0 4px;font-weight:600}
+.stat b{font-size:18px;font-variant-numeric:tabular-nums}.stat span{color:var(--mute);font-size:13px;margin-left:5px}
+main{display:grid;grid-template-columns:270px minmax(0,1fr) 340px;gap:14px;padding:14px 20px;height:calc(100vh - 58px)}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;overflow:auto;min-height:0}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+button:hover{border-color:var(--brand)}button.primary{background:var(--brand);color:#fff;border-color:var(--brand)}button.stop{background:var(--bad);color:#fff;border-color:var(--bad)}
+button:disabled{opacity:.5;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+input,select,textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;width:100%;margin-bottom:8px;background:var(--card);color:var(--ink)}
+.lead{display:block;width:100%;text-align:left;margin-bottom:6px;padding:9px 12px}.lead.on{background:var(--soft);border-color:var(--brand)}
+.row{display:flex;justify-content:space-between;gap:8px}.mute{color:var(--mute);font-size:13px}
+.Hot{color:var(--hot);font-weight:600}.Warm{color:var(--warm);font-weight:600}.Cold{color:var(--mute)}
+#mid{display:flex;flex-direction:column;padding:0}#bar{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#bar h2{margin:0 auto 0 0}#log{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:9px;min-height:0}
+.t{max-width:78%;padding:8px 13px;border-radius:14px;overflow-wrap:anywhere}.assistant{background:var(--soft);align-self:flex-start}.user{background:#edeeec;align-self:flex-end}
+.ev{align-self:center;color:var(--mute);font-size:13px;text-align:center}.ev.good{color:var(--brand);font-weight:600}.ev.bad{color:var(--bad)}
+#send{display:none;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}#send input{margin:0}
+#msg{padding:8px 16px;color:var(--bad);font-size:14px}#msg:empty{display:none}
+.part{display:grid;grid-template-columns:76px 1fr 26px;gap:8px;align-items:center;font-size:13px}.track{height:6px;background:var(--line);border-radius:3px}.track i{display:block;height:6px;border-radius:3px;background:var(--brand);transition:width .4s}
+.big{font-size:34px;font-weight:650;font-variant-numeric:tabular-nums}.visit{background:var(--soft);padding:10px 12px;border-radius:8px;margin:10px 0}
+ul{margin:4px 0;padding-left:18px}dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:14px}dt{color:var(--mute)}dd{margin:0;overflow-wrap:anywhere}
+a{color:var(--brand)}
+@media(max-width:1000px){main{grid-template-columns:1fr;height:auto}#mid{height:75vh}#mid{order:-1}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<link rel="stylesheet" href="/static/products.css"><link rel="stylesheet" href="/static/calendar.css">
+</head>
+<body>
+<header><h1>Sales Desk</h1><nav aria-label="Main"><button id="tabL" aria-current="page">Leads</button><button id="tabC">Calendar</button><button id="tabP">Products</button><button id="tabK">Callers</button></nav><div id="stats" style="display:flex;gap:22px;flex-wrap:wrap"></div></header>
+<main id="leadsView">
+<section>
+  <div class="row" style="align-items:center;margin-bottom:10px"><h2 style="margin:0 auto 0 0">Leads</h2><button id="addt" aria-expanded="false">Add</button><button id="importb">Import</button><button id="selb" aria-pressed="false">Select</button></div>
+  <form id="add" hidden>
+    <input id="nm" placeholder="Name" aria-label="Name" maxlength="60" required><input id="ph" placeholder="Phone" aria-label="Phone" maxlength="20" required>
+    <select id="prod" aria-label="Product"></select>
+    <textarea id="ctx" rows="3" maxlength="1500" placeholder="What do we know about this lead? (optional)" aria-label="Lead notes"></textarea>
+    <button id="addb" class="primary">Add lead</button></form>
+  <input id="find" type="search" placeholder="Search name or phone" aria-label="Search leads"><select id="flt" aria-label="Filter leads by product"></select>
+  <div class="two"><select id="fst" aria-label="Filter leads by status"><option value="">All statuses</option><option>New</option><option>Contacted</option><option>Booked</option><option>Attended</option><option>No-show</option><option>Do not call</option><option value="cb">Call back asked</option><option value="never">Never called</option></select><select id="fbd" aria-label="Filter leads by quality"><option value="">All quality</option><option>Hot</option><option>Warm</option><option>Cold</option></select></div>
+  <div class="sortrow"><select id="srt" aria-label="Sort leads"><option value="score">Highest score</option><option value="new">Newest first</option><option value="recent">Called most recently</option><option value="old">Called longest ago</option><option value="name">Name A to Z</option></select><button id="clr" type="button" hidden>Clear</button></div>
+  <div id="selbar" hidden></div>
+  <div id="undo" role="status"></div>
+  <div id="leads"></div>
+  <details id="gone" hidden><summary></summary><div></div></details>
+</section>
+<section id="mid">
+  <div id="bar"><h2 id="who">Choose a lead</h2><span id="status" class="mute" role="status"></span>
+    <button id="mute" hidden>Mute</button><button id="voice" class="primary" disabled>Start voice call</button><button id="text" disabled>Text chat</button><button id="end" class="stop" hidden>End</button></div>
+  <div id="msg" role="alert"></div>
+  <div id="log"><p class="mute">Choose a lead, then start a call. You'll be talking to an AI. Calls are transcribed and analysed, so use made-up details.</p></div>
+  <form id="send"><input id="say" placeholder="Type what the customer says" aria-label="Message" maxlength="1000" autocomplete="off"><button class="primary">Send</button></form>
+</section>
+<section id="side"><p class="mute">Choose a lead to see their details.</p></section>
+</main>
+<main id="calendarView" hidden></main>
+<main id="productsView" hidden></main>
+<main id="callersView" hidden></main>
+<dialog id="dlg"></dialog>
+<dialog id="imp"></dialog>
+<script src="https://cdn.jsdelivr.net/npm/livekit-client@2.25.0/dist/livekit-client.umd.min.js"></script>
+<script src="/static/app.js"></script>
+<script src="/static/leads.js"></script>
+<script src="/static/products.js"></script>
+<script src="/static/import.js"></script>
+<script src="/static/calendar.js"></script>
+<script src="/static/callers.js"></script>
+</body></html>
